@@ -13,6 +13,21 @@ function Home() {
         <Link to="/image" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
           Generate Images
         </Link>
+        <Link to="/music" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors">
+          Music
+        </Link>
+        <Link to="/video" className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-colors">
+          Video
+        </Link>
+        <Link to="/langgen" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
+          Language
+        </Link>
+        <Link to="/Qr" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
+         Qr-generator
+        </Link>
+        <Link to="/Code" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
+         COde
+        </Link>
       </div>
     </div>
   );

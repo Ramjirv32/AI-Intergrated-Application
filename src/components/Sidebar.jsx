@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaComments, FaImage, FaUser } from "react-icons/fa";
+import { FaHome, FaComments, FaImage, FaUser, FaVideo, FaLanguage, FaMusic, FaQrcode } from "react-icons/fa";
 
 function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -50,6 +50,39 @@ function Sidebar() {
         >
           <FaImage />
           {!isCollapsed && <span>Image Generation</span>}
+        </Link>
+
+        <Link
+          to="/video"
+          className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
+        >
+          <FaVideo />
+          {!isCollapsed && <span>Video Generator</span>}
+        </Link>
+
+        <Link
+          to="/Langgen"
+          className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
+        >
+          <FaLanguage />
+          {!isCollapsed && <span>Language Translator</span>}
+        </Link>
+
+        <Link
+          to="/music"
+          className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
+        >
+          <FaMusic />
+          {!isCollapsed && <span>Music Generator</span>}
+        </Link>
+
+        {/* New Link for QR Code Generator */}
+        <Link
+          to="/qr"
+          className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
+        >
+          <FaQrcode />
+          {!isCollapsed && <span>QR Code Generator</span>}
         </Link>
       </nav>
 

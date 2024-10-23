@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronUp, ChevronDown } from "lucide-react";
+import { ChevronUp, ChevronDown, Copy } from "lucide-react"; // Import Copy icon
 import think1 from "./images/think3.gif";
-import think2 from "./images/AI-think.gif";
 
 export default function Main() {
   const [question, setQuestion] = useState("");
@@ -27,7 +26,7 @@ export default function Main() {
     return () => window.removeEventListener('resize', checkScroll);
   }, [answer]);
 
-  async function generateAnswer(e: React.FormEvent<HTMLFormElement>) {
+  async function generateAnswer(e) {
     e.preventDefault();
     setIsLoading(true);
     setAnswer("");
@@ -38,7 +37,7 @@ export default function Main() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: question }] }], 
+          contents: [{ parts: [{ text: question }] }],
         }),
       });
 
@@ -47,7 +46,10 @@ export default function Main() {
       }
 
       const data = await response.json();
-      setAnswer(data.candidates[0].content.parts[0].text);
+      const rawAnswer = data.candidates[0].content.parts[0].text;
+      // Remove asterisks from the answer
+      const cleanedAnswer = rawAnswer.replace(/\*/g, ""); 
+      setAnswer(cleanedAnswer);
     } catch (error) {
       console.error(error);
       setAnswer("Sorry - Something went wrong. Please try again!");
@@ -55,6 +57,16 @@ export default function Main() {
 
     setIsLoading(false);
   }
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(answer)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch(err => {
+        console.error("Failed to copy: ", err);
+      });
+  };
 
   const scrollTo = (position: 'top' | 'bottom') => {
     if (position === 'top' && topRef.current) {
@@ -96,6 +108,7 @@ export default function Main() {
 
         <div className="space-y-2">
           <h2 className="text-xl font-semibold text-white">Answer</h2>
+          <Copy className="h-5 w-5 ml-[600px] mt-[-50px]"  onClick={copyToClipboard}/>
           <div className="relative">
             <div 
               ref={answerRef}
@@ -104,11 +117,13 @@ export default function Main() {
               <div ref={topRef}></div>
               {isLoading ? (
                 <div className="flex justify-center items-center h-full">
-                  <img src={think1} alt="Thinking..." className="w-16" style={{ height: '200px',width: '250px' }} />
-
+                  <img src={think1} alt="Thinking..." className="w-16" style={{ height: '200px', width: '250px' }} />
                 </div>
               ) : (
-                <div className="text-left whitespace-pre-line">{answer}</div>
+                <div className="text-left whitespace-pre-line">
+                  {answer}
+                  
+                </div>
               )}
               <div ref={bottomRef}></div>
             </div>
