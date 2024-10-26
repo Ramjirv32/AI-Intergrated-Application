@@ -9,6 +9,8 @@ import Video from './components/Video.jsx';
 import Langgen from './components/Langgen.jsx';
 import Qr from "./components/Qr.jsx";
 import Code from "./components/Code.jsx";
+// import Pdf from "./components/pdf.jsx"
+import Weather from "./components/Weather.jsx"
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
               <Route path="/video" element={<Video />} />
               <Route path="/Qr" element={<Qr />} />
               <Route path="/Code" element={<Code />} />
+              <Route path="/Weather" element={<Weather/>} />
+
             </Routes>
           </div>
         </div>

@@ -1,6 +1,11 @@
+'use client'
+
 import React, { useState, useRef, useEffect } from "react";
-import { ChevronUp, ChevronDown, Copy } from "lucide-react"; // Import Copy icon
+import { ChevronUp, ChevronDown, Copy } from "lucide-react";
 import think1 from "./images/think3.gif";
+import Swal from "sweetalert2";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Main() {
   const [question, setQuestion] = useState("");
@@ -10,9 +15,14 @@ export default function Main() {
   const answerRef = useRef(null);
   const topRef = useRef(null);
   const bottomRef = useRef(null);
-  const api = 'AIzaSyAMuQdycsuzqwzGsxlHHwA7GtNqHFewUV8';
+  const api= process.env.REACT_APP_GEMINI_API_KEY;
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
     const checkScroll = () => {
       if (answerRef.current) {
         setShowScrollButtons(
@@ -30,6 +40,19 @@ export default function Main() {
     e.preventDefault();
     setIsLoading(true);
     setAnswer("");
+
+    if (!question.trim()) {
+      try {
+        const sqlResponse = await handleEmptyQuestion();
+        setAnswer(sqlResponse); 
+      } catch (error) {
+        console.error(error);
+        setAnswer("Sorry - Something went wrong. Please try again!");
+      }
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${api}`, {
         method: "POST",
@@ -47,7 +70,6 @@ export default function Main() {
 
       const data = await response.json();
       const rawAnswer = data.candidates[0].content.parts[0].text;
-      // Remove asterisks from the answer
       const cleanedAnswer = rawAnswer.replace(/\*/g, ""); 
       setAnswer(cleanedAnswer);
     } catch (error) {
@@ -58,17 +80,26 @@ export default function Main() {
     setIsLoading(false);
   }
 
+  const handleEmptyQuestion = async () => {
+    return "SQL operation executed for empty question.";
+  };
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(answer)
       .then(() => {
-        alert("Copied to clipboard!");
+        Swal.fire({
+          icon: "success",
+          text: "Copied to Clipboard",
+          background: '#1f2937',
+          color: '#f3f4f6',
+        });
       })
       .catch(err => {
         console.error("Failed to copy: ", err);
       });
   };
 
-  const scrollTo = (position: 'top' | 'bottom') => {
+  const scrollTo = (position) => {
     if (position === 'top' && topRef.current) {
       topRef.current.scrollIntoView({ behavior: 'smooth' });
     } else if (position === 'bottom' && bottomRef.current) {
@@ -78,10 +109,9 @@ export default function Main() {
 
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <div className="w-full max-w-2xl bg-gray-800 rounded-lg shadow-lg p-6 space-y-6">
-        <h1 className="text-4xl font-bold text-center text-white mb-4">Chat AI</h1>
-
-        <form onSubmit={generateAnswer} className="space-y-4">
+      <div className="w-full max-w-2xl bg-transparent rounded-lg shadow-lg p-6 space-y-6" data-aos="fade-up">
+        <h1 className="text-4xl font-bold text-center text-white mb-4" data-aos="fade-down">Chat AI</h1>
+        <form onSubmit={generateAnswer} className="space-y-4" data-aos="fade-right">
           <textarea
             required
             className="w-full border border-gray-700 rounded bg-gray-700 text-white min-h-[100px] p-3 transition-all duration-300 focus:border-pink-400 focus:ring focus:ring-pink-300 focus:ring-opacity-50"
@@ -105,10 +135,9 @@ export default function Main() {
             )}
           </button>
         </form>
-
-        <div className="space-y-2">
+        <div className="space-y-2" data-aos="fade-left">
           <h2 className="text-xl font-semibold text-white">Answer</h2>
-          <Copy className="h-5 w-5 ml-[600px] mt-[-50px]"  onClick={copyToClipboard}/>
+          <Copy className="h-5 w-5 ml-[600px] mt-[-50px] text-white" onClick={copyToClipboard} />
           <div className="relative">
             <div 
               ref={answerRef}
@@ -122,7 +151,6 @@ export default function Main() {
               ) : (
                 <div className="text-left whitespace-pre-line">
                   {answer}
-                  
                 </div>
               )}
               <div ref={bottomRef}></div>

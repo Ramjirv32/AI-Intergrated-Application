@@ -1,4 +1,4 @@
-"use client"
+
 
 import React, { useState } from 'react'
 import axios from 'axios'
@@ -47,8 +47,10 @@ export default function FootballVideo() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4 text-gray-100">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-4 text-gray-100">
       <h2 className="text-3xl font-bold mb-6">Search for Video</h2>
+      <p className="text-sm text-gray-400 mb-4">
+      Note: This video generator fetches pre-existing videos based on input values and does not create AI-generated content. The fetched video may not be fully accurate as it pulls from previously saved video content.      </p>
       
       <div className="mb-6 flex items-center">
         <input

@@ -1,36 +1,58 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Home() {
+
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { MessageSquare, Image, Music, Video, QrCode, CloudSun, Code } from 'lucide-react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
+export default function Component() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    })
+  }, [])
+
+  const features = [
+    { name: 'Conversation', icon: MessageSquare, to: '/main', color: 'from-violet-500 to-violet-600' },
+    { name: 'Image Generation', icon: Image, to: '/image', color: 'from-pink-500 to-pink-600' },
+    { name: 'Music Generation', icon: Music, to: '/music', color: 'from-emerald-500 to-emerald-600' },
+    { name: 'Video Generation', icon: Video, to: '/video', color: 'from-orange-500 to-orange-600' },
+    { name: 'QR Generator', icon: QrCode, to: '/Qr', color: 'from-blue-500 to-blue-600' },
+    { name: 'Weather', icon: CloudSun, to: '/Weather', color: 'from-cyan-500 to-cyan-600' },
+    { name: 'Code Generator', icon: Code, to: '/Code', color: 'from-indigo-500 to-indigo-600' },
+  ]
+
   return (
-    <div className="h-full flex flex-col items-center justify-center text-white">
-      <h1 className="text-5xl font-bold mb-8">Welcome to AI Navigator</h1>
-      <p className="text-xl mb-8">Explore the power of AI with our conversation and image generation tools.</p>
-      <div className="flex gap-4">
-        <Link to="/main" className="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded transition-colors">
-          Start Conversation
-        </Link>
-        <Link to="/image" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors">
-          Generate Images
-        </Link>
-        <Link to="/music" className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors">
-          Music
-        </Link>
-        <Link to="/video" className="bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded transition-colors">
-          Video
-        </Link>
-        <Link to="/langgen" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
-          Language
-        </Link>
-        <Link to="/Qr" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
-         Qr-generator
-        </Link>
-        <Link to="/Code" className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors">
-         COde
-        </Link>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-4">
+      <h1 
+        className="text-4xl md:text-5xl font-bold mb-6 text-center"
+        data-aos="fade-down"
+      >
+        Explore the power of AI
+      </h1>
+      <p 
+        className="text-xl mb-12 text-center max-w-2xl"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+        Chat with the smartest AI - Experience the power of AI across various domains
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
+        {features.map((feature, index) => (
+          <Link
+            key={feature.name}
+            to={feature.to}
+            className={`flex items-center space-x-4 p-6 rounded-lg transition-all duration-300 bg-gradient-to-r ${feature.color} hover:shadow-lg hover:-translate-y-1`}
+            data-aos="zoom-in"
+            data-aos-delay={100 * (index + 1)}
+          >
+            <feature.icon className="w-8 h-8 flex-shrink-0" />
+            <span className="text-lg font-semibold">{feature.name}</span>
+          </Link>
+        ))}
       </div>
     </div>
-  );
+  )
 }
-
-export default Home;
