@@ -63,7 +63,7 @@ export default function QrCodeGenerator() {
       </div>
 
       <button
-        onClick={handleGenerate}
+        onClick={handleGenerate }
         className="mt-6 px-6 py-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50"
         data-aos="fade-up"
         data-aos-delay="400"
