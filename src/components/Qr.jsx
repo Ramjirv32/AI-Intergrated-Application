@@ -1,5 +1,4 @@
 
-
 import React, { useState, useRef, useEffect } from "react"
 import QRCode from "react-qr-code"
 import { toPng } from "html-to-image"
