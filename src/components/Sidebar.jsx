@@ -12,7 +12,7 @@ import {
   FaAngleRight,
   FaCode,
   FaVideo,
-  FaEye // Importing the eye icon for the portfolio
+  FaEye 
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -105,8 +105,12 @@ function Sidebar() {
         <div className="mt-auto flex items-center gap-3">
   <FaUser />
   {!isCollapsed && (
+    
     <div className="flex items-center">
-      <p className="text-sm text-gray-400">Web Developer</p>
+       <p className="text-sm text-gray-400">
+        Ramji
+       </p>
+      <p className="text-sm text-gray-400 ml-3">Web Developer</p>
       <a 
         href="https://portfolio-tan-iota-74.vercel.app/" 
         target="_blank" 

@@ -5,6 +5,9 @@ import Swal from 'sweetalert2';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+
+// python3 -m uvicorn main:app --host 0.0.0.0 --port 5000  aws instance running
+
 const languages = [
   { code: 'en', name: 'English' },
   { code: 'ta', name: 'Tamil' },
@@ -40,7 +43,7 @@ export default function LanguageTranslator() {
       return;
     }
     try {
-      const response = await fetch(`http://51.20.8.79:5000//translate`, {
+      const response = await fetch(`http://16.171.27.195:5000/translate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
