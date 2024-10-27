@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronUp, ChevronDown, Copy } from "lucide-react";
 import think1 from "./images/think3.gif";
@@ -15,19 +13,14 @@ export default function Main() {
   const answerRef = useRef(null);
   const topRef = useRef(null);
   const bottomRef = useRef(null);
-  const api= process.env.REACT_APP_GEMINI_API_KEY;
+  const api = process.env.REACT_APP_GEMINI_API_KEY;
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
+    AOS.init({ duration: 1000, once: true });
 
     const checkScroll = () => {
       if (answerRef.current) {
-        setShowScrollButtons(
-          answerRef.current.scrollHeight > answerRef.current.clientHeight
-        );
+        setShowScrollButtons(answerRef.current.scrollHeight > answerRef.current.clientHeight);
       }
     };
 
@@ -44,7 +37,7 @@ export default function Main() {
     if (!question.trim()) {
       try {
         const sqlResponse = await handleEmptyQuestion();
-        setAnswer(sqlResponse); 
+        setAnswer(sqlResponse);
       } catch (error) {
         console.error(error);
         setAnswer("Sorry - Something went wrong. Please try again!");
@@ -56,16 +49,13 @@ export default function Main() {
     try {
       const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${api}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: question }] }],
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: [{ parts: [{ text: question }] }] }),
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json();
+        throw new Error(`HTTP error! ${errorData.message || 'Failed to generate answer.'}`);
       }
 
       const data = await response.json();
@@ -75,9 +65,9 @@ export default function Main() {
     } catch (error) {
       console.error(error);
       setAnswer("Sorry - Something went wrong. Please try again!");
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   }
 
   const handleEmptyQuestion = async () => {
@@ -87,12 +77,7 @@ export default function Main() {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(answer)
       .then(() => {
-        Swal.fire({
-          icon: "success",
-          text: "Copied to Clipboard",
-          background: '#1f2937',
-          color: '#f3f4f6',
-        });
+        Swal.fire({ icon: "success", text: "Copied to Clipboard", background: '#1f2937', color: '#f3f4f6' });
       })
       .catch(err => {
         console.error("Failed to copy: ", err);

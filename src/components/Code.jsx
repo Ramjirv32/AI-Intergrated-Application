@@ -11,9 +11,8 @@ const CodeGenerator = () => {
   const [generatedCode, setGeneratedCode] = useState('');
   const [loading, setLoading] = useState(false);
 
- 
   useEffect(() => {
-    AOS.init({ duration: 1000 }); 
+    AOS.init({ duration: 1000 });
   }, []);
 
   const handleInputChange = (e) => {
@@ -61,13 +60,13 @@ const CodeGenerator = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-gray-100 p-6 space-y-6">
-      <h1 data-aos="fade-up" className="text-4xl font-bold">Code Generator</h1>
+      <h1 data-aos="fade-up" className="text-4xl font-bold text-center">Code Generator</h1>
 
       <textarea
         value={inputText}
         onChange={handleInputChange}
         placeholder="Enter your request..."
-        className="w-full md:w-3/4 p-4 bg-[#2B2F41] rounded-lg border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+        className="w-full md:w-3/4 lg:w-2/3 p-4 bg-[#2B2F41] rounded-lg border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
         data-aos="fade-right"
       />
 
@@ -79,13 +78,13 @@ const CodeGenerator = () => {
       >
         {loading ? 'Generating...' : 'Generate Code'}
       </button>
-      
+
       {loading && (
-        <img src={loadingGIF} alt="Loading..." style={{ width: '350px', height: '200px' }} className="mt-4" data-aos="zoom-in" />
+        <img src={loadingGIF} alt="Loading..." className="mt-4 w-44 h-auto" data-aos="zoom-in" />
       )}
 
       {generatedCode && (
-        <div className="relative w-full md:w-3/4 bg-[#2B2F41] rounded-lg p-4 mt-4" data-aos="fade-left">
+        <div className="relative w-full md:w-3/4 lg:w-2/3 bg-[#2B2F41] rounded-lg p-4 mt-4" data-aos="fade-left">
           <button
             onClick={handleCopyToClipboard}
             className="absolute top-2 right-2 text-gray-400 hover:text-white"

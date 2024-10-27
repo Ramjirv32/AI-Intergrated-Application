@@ -22,9 +22,6 @@ export default function Weather() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("API Key:", key); 
-    console.log("City:", city); 
-    
     if (!key) {
       setError('API Key is missing. Please check your environment variables.');
       return;
@@ -35,7 +32,6 @@ export default function Weather() {
     try {
       const response = await axios.get(url);
       const w = response.data;
-      console.log("Weather Response:", w);
 
       let o;
       if (w.main.temp > 35) {
@@ -73,7 +69,7 @@ export default function Weather() {
     <div className="min-h-screen flex items-center justify-center bg-transparent text-white">
       <div className="bg-[#24283b] p-6 rounded-lg shadow-lg w-full max-w-lg" data-aos="fade-up">
         <h1 className="text-3xl font-bold mb-6 text-center" data-aos="fade-down">AI Weather Forecast</h1>
-        <form onSubmit={handleSubmit} className="flex items-center space-x-4 mb-6" data-aos="fade-right">
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4 mb-6" data-aos="fade-right">
           <div className="flex-1 relative">
             <input
               type="text"
@@ -85,7 +81,7 @@ export default function Weather() {
               onChange={(e) => setCity(e.target.value)}
             />
           </div>
-          <button type="submit" className="bg-pink-500 text-white p-3 rounded-full hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-[#24283b]">
+          <button type="submit" className="bg-pink-500 text-white p-3 rounded-full hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-[#24283b] mt-4 md:mt-0">
             <Search className="w-5 h-5" />
           </button>
         </form>
@@ -104,7 +100,7 @@ export default function Weather() {
               <p className="text-4xl text-gray-100 mt-2">{weather.main.temp} °C</p>
             </div>
 
-            <div className="flex justify-around mt-6 text-gray-300">
+            <div className="flex justify-around mt-6 text-gray-300 flex-wrap">
               <div className="text-center">
                 <i className="fa-solid fa-wind text-pink-400 text-2xl mb-2"></i>
                 <p className="text-lg">{weather.wind.speed} Km/hr</p>

@@ -12,7 +12,7 @@ import {
   FaAngleRight,
   FaCode,
   FaVideo,
-  FaEye 
+  FaEye
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -21,9 +21,7 @@ function Sidebar() {
   return (
     <div className="relative">
       <div
-        className={`h-screen ${
-          isCollapsed ? "w-20 px-2" : "w-64 px-4"
-        } bg-[#1f1f2e] text-white flex flex-col py-8 transition-all duration-300`}
+        className={`h-screen ${isCollapsed ? "w-20 px-2" : "w-64 px-4"} bg-[#1f1f2e] text-white flex flex-col py-8 transition-all duration-300`}
       >
         <div className="flex items-center justify-between">
           <h2
@@ -41,7 +39,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaHome />
-            {!isCollapsed && <span>Home</span>}
+            {!isCollapsed && <span className="hidden md:inline">Home</span>}
           </Link>
 
           <Link
@@ -49,7 +47,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaComments />
-            {!isCollapsed && <span>Conversation</span>}
+            {!isCollapsed && <span className="hidden md:inline">Conversation</span>}
           </Link>
 
           <Link
@@ -57,7 +55,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaImage />
-            {!isCollapsed && <span>Image Generation</span>}
+            {!isCollapsed && <span className="hidden md:inline">Image Generation</span>}
           </Link>
 
           <Link
@@ -65,7 +63,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaVideo />
-            {!isCollapsed && <span>Video Fetcher</span>}
+            {!isCollapsed && <span className="hidden md:inline">Video Fetcher</span>}
           </Link>
 
           <Link
@@ -73,7 +71,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaLanguage />
-            {!isCollapsed && <span>Language Translator</span>}
+            {!isCollapsed && <span className="hidden md:inline">Language Translator</span>}
           </Link>
 
           <Link
@@ -81,7 +79,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaQrcode />
-            {!isCollapsed && <span>QR Code Generator</span>}
+            {!isCollapsed && <span className="hidden md:inline">QR Code Generator</span>}
           </Link>
 
           <Link
@@ -89,7 +87,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaCode />
-            {!isCollapsed && <span>Code Generator</span>}
+            {!isCollapsed && <span className="hidden md:inline">Code Generator</span>}
           </Link>
 
           <Link
@@ -97,7 +95,7 @@ function Sidebar() {
             className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
           >
             <FaCloudSun />
-            {!isCollapsed && <span>Weather</span>}
+            {!isCollapsed && <span className="hidden md:inline">Weather</span>}
           </Link>
         </nav>
 

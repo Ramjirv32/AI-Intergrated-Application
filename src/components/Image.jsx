@@ -9,16 +9,17 @@ const Image = () => {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
   const placeholderImage = "https://v0.dev/placeholder.svg?height=400&width=400";
-const key = process.env.REACT_APP_HUGGING_FACE_API_KEY;
+  const key = process.env.REACT_APP_HUGGING_FACE_API_KEY;
+
   const fetchImage = async (event) => {
     event.preventDefault();
     if (inputRef.current?.value === "") {
       Swal.fire({
-        icon:"error",
-        text:"Please enter Image to Search",
+        icon: "error",
+        text: "Please enter Image to Search",
         background: '#1f2937',
         color: '#f3f4f6'
-      })
+      });
       return;
     }
     setLoading(true);
@@ -36,16 +37,16 @@ const key = process.env.REACT_APP_HUGGING_FACE_API_KEY;
       const imageUrl = URL.createObjectURL(blob);
       setImageu(imageUrl);
     } catch (error) {
-      console.error('Error generating image:',error);
+      console.error('Error generating image:', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-center">
+    <div className="h-full flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
-        <h1 className="text-4xl font-bold text-center text-white mb-8 animate-bounce" >
+        <h1 className="text-4xl font-bold text-center text-white mb-8 animate-bounce">
           AI image <span className="text-pink-500 ">generator</span>
         </h1>
         <div className="w-full aspect-square bg-gray-800 rounded-lg overflow-hidden flex items-center justify-center relative">

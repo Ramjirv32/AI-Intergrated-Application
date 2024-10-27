@@ -1,10 +1,7 @@
-
-
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
 
 // python3 -m uvicorn main:app --host 0.0.0.0 --port 5000  aws instance running
 
@@ -77,7 +74,7 @@ export default function LanguageTranslator() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden" data-aos="fade-up">
+    <div className="w-full max-w-md mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden" data-aos="fade-up">
       <div className="p-6">
         <h2 className="text-2xl font-bold text-center text-white mb-6" data-aos="fade-down">Language Translator</h2>
         <div className="space-y-4">

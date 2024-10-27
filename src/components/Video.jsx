@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Loader, Search } from 'lucide-react'
@@ -50,20 +48,21 @@ export default function FootballVideo() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-4 text-gray-100">
       <h2 className="text-3xl font-bold mb-6">Search for Video</h2>
       <p className="text-sm text-gray-400 mb-4">
-      Note: This video generator fetches pre-existing videos based on input values and does not create AI-generated content. The fetched video may not be fully accurate as it pulls from previously saved video content.      </p>
-      
-      <div className="mb-6 flex items-center">
+        Note: This video generator fetches pre-existing videos based on input values and does not create AI-generated content. The fetched video may not be fully accurate as it pulls from previously saved video content.
+      </p>
+
+      <div className="mb-6 flex flex-col sm:flex-row items-center w-full max-w-md">
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Enter search term..."
-          className="p-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-100 bg-gray-800 w-64"
+          className="p-2 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 text-gray-100 bg-gray-800 flex-grow sm:mr-4 mb-2 sm:mb-0"
         />
         <button
           type="button"
           onClick={handleFetchVideo}
-          className="ml-4 bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition duration-300 flex items-center"
+          className="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition duration-300 flex items-center"
         >
           <Search className="w-5 h-5 mr-2" />
           Search
