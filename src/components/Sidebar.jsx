@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   FaHome,
@@ -16,7 +16,23 @@ import {
 } from "react-icons/fa";
 
 function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true); // Start collapsed
+
+  // Effect to manage sidebar state based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsCollapsed(false); // Expand on larger screens
+      } else {
+        setIsCollapsed(true); // Collapse on mobile
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <div className="relative">
@@ -25,77 +41,51 @@ function Sidebar() {
       >
         <div className="flex items-center justify-between">
           <h2
-            className={`text-2xl font-bold transition-opacity duration-300 ${
-              isCollapsed ? "opacity-0" : "opacity-100"
-            }`}
+            className={`text-2xl font-bold transition-opacity duration-300 ${isCollapsed ? "opacity-0" : "opacity-100"}`}
           >
             AI Navigator
           </h2>
         </div>
 
         <nav className="mt-10 flex flex-col gap-6">
-          <Link
-            to="/"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaHome />
-            {!isCollapsed && <span className="hidden md:inline">Home</span>}
+            {!isCollapsed && <span>Home</span>}
           </Link>
 
-          <Link
-            to="/main"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/main" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaComments />
-            {!isCollapsed && <span className="hidden md:inline">Conversation</span>}
+            {!isCollapsed && <span>Conversation</span>}
           </Link>
 
-          <Link
-            to="/image"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/image" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaImage />
-            {!isCollapsed && <span className="hidden md:inline">Image Generation</span>}
+            {!isCollapsed && <span>Image Generation</span>}
           </Link>
 
-          <Link
-            to="/Video"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/Video" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaVideo />
-            {!isCollapsed && <span className="hidden md:inline">Video Fetcher</span>}
+            {!isCollapsed && <span>Video Fetcher</span>}
           </Link>
 
-          <Link
-            to="/Langgen"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/Langgen" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaLanguage />
-            {!isCollapsed && <span className="hidden md:inline">Language Translator</span>}
+            {!isCollapsed && <span>Language Translator</span>}
           </Link>
 
-          <Link
-            to="/qr"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/qr" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaQrcode />
-            {!isCollapsed && <span className="hidden md:inline">QR Code Generator</span>}
+            {!isCollapsed && <span>QR Code Generator</span>}
           </Link>
 
-          <Link
-            to="/Code"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/Code" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaCode />
-            {!isCollapsed && <span className="hidden md:inline">Code Generator</span>}
+            {!isCollapsed && <span>Code Generator</span>}
           </Link>
 
-          <Link
-            to="/Weather"
-            className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors"
-          >
+          <Link to="/Weather" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaCloudSun />
-            {!isCollapsed && <span className="hidden md:inline">Weather</span>}
+            {!isCollapsed && <span>Weather</span>}
           </Link>
         </nav>
 
@@ -107,10 +97,10 @@ function Sidebar() {
                 <p className="text-sm text-gray-400">Ramji</p>
                 <p className="text-sm text-gray-400 ml-3">Web Developer</p>
               </div>
-              <a 
-                href="https://portfolio-tan-iota-74.vercel.app/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://portfolio-tan-iota-74.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center mt-1"
               >
                 View Portfolio
@@ -121,14 +111,15 @@ function Sidebar() {
         </div>
       </div>
 
-      <button
-        onClick={() => setIsCollapsed(!isCollapsed)}
-        className={`absolute top-8 -right-3 bg-[#1f1f2e] text-white p-1 rounded-full focus:outline-none ${
-          isCollapsed ? "transform translate-x-full" : ""
-        }`}
-      >
-        {isCollapsed ? <FaAngleRight /> : <FaAngleLeft />}
-      </button>
+      {/* Toggle button only visible on larger screens */}
+      {!isCollapsed && (
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className={`absolute top-8 -right-3 bg-[#1f1f2e] text-white p-1 rounded-full focus:outline-none`}
+        >
+          {isCollapsed ? <FaAngleRight /> : <FaAngleLeft />}
+        </button>
+      )}
     </div>
   );
 }
