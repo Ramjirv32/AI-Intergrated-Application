@@ -99,31 +99,30 @@ function Sidebar() {
             <FaCloudSun />
             {!isCollapsed && <span>Weather</span>}
           </Link>
-
-         
         </nav>
-        <div className="mt-auto flex items-center gap-3">
-  <FaUser />
-  {!isCollapsed && (
-    
-    <div className="flex items-center">
-       <p className="text-sm text-gray-400">
-        Ramji
-       </p>
-      <p className="text-sm text-gray-400 ml-3">Web Developer</p>
-      <a 
-        href="https://portfolio-tan-iota-74.vercel.app/" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        className="ml-1 flex items-center"
-      >
-        <FaEye className="text-gray-400 hover:text-pink-400 transition-colors" />
-      </a>
-    </div>
-  )}
-</div>
 
+        <div className="mt-auto flex items-center gap-3">
+          <FaUser />
+          {!isCollapsed && (
+            <div className="flex flex-col">
+              <div className="flex items-center">
+                <p className="text-sm text-gray-400">Ramji</p>
+                <p className="text-sm text-gray-400 ml-3">Web Developer</p>
+              </div>
+              <a 
+                href="https://portfolio-tan-iota-74.vercel.app/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center mt-1"
+              >
+                View Portfolio
+                <FaEye className="text-gray-400 hover:text-pink-400 transition-colors ml-4" />
+              </a>
+            </div>
+          )}
+        </div>
       </div>
+
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
         className={`absolute top-8 -right-3 bg-[#1f1f2e] text-white p-1 rounded-full focus:outline-none ${
