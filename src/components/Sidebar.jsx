@@ -16,20 +16,20 @@ import {
 } from "react-icons/fa";
 
 function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(true); // Start collapsed
+  const [isCollapsed, setIsCollapsed] = useState(true); 
 
-  // Effect to manage sidebar state based on screen width
+ 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setIsCollapsed(false); // Expand on larger screens
+        setIsCollapsed(false); 
       } else {
-        setIsCollapsed(true); // Collapse on mobile
+        setIsCollapsed(true); 
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check
+    handleResize(); 
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -111,7 +111,7 @@ function Sidebar() {
         </div>
       </div>
 
-      {/* Toggle button only visible on larger screens */}
+     
       {!isCollapsed && (
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
