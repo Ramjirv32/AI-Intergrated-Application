@@ -1,4 +1,4 @@
-'use client'
+
 
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronUp, ChevronDown, Copy } from "lucide-react";
@@ -81,7 +81,7 @@ export default function Main() {
   }
 
   const handleEmptyQuestion = async () => {
-    return "SQL operation executed for empty question.";
+    return "SQL operation executed for empty question";
   };
 
   const copyToClipboard = () => {
