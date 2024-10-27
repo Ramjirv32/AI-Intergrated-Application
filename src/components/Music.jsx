@@ -13,7 +13,7 @@ const languages = {
   es: "Spanish",
   fr: "French",
   de: "German",
-  // Add more languages as needed
+
 };
 
 export default function SpeechGenerator() {
@@ -80,7 +80,7 @@ export default function SpeechGenerator() {
       const audioObjectUrl = URL.createObjectURL(audioBlob);
       setAudioUrl(audioObjectUrl);
       waveSurferRef.current?.load(audioObjectUrl);
-      await handleTranslateText(); // Call translation after generating audio
+      await handleTranslateText(); 
     } catch (error) {
       Swal.fire({
         text: 'Failed to fetch the audio. ' + error.message,

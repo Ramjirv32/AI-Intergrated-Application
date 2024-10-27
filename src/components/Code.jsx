@@ -11,9 +11,9 @@ const CodeGenerator = () => {
   const [generatedCode, setGeneratedCode] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Initialize AOS
+ 
   useEffect(() => {
-    AOS.init({ duration: 1000 }); // Customize the duration as needed
+    AOS.init({ duration: 1000 }); 
   }, []);
 
   const handleInputChange = (e) => {

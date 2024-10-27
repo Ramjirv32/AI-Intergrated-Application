@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Search } from 'lucide-react';
@@ -13,7 +11,7 @@ export default function Weather() {
   const [image, setImage] = useState('');
   const [isFetched, setIsFetched] = useState(false);
   
-  const key = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+  const key = process.env.REACT_APP_WEATHER_API_KEY;
 
   useEffect(() => {
     AOS.init({
@@ -24,13 +22,22 @@ export default function Weather() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("API Key:", key); 
+    console.log("City:", city); 
+    
+    if (!key) {
+      setError('API Key is missing. Please check your environment variables.');
+      return;
+    }
+
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`;
 
     try {
       const response = await axios.get(url);
       const w = response.data;
-      let o;
+      console.log("Weather Response:", w);
 
+      let o;
       if (w.main.temp > 35) {
         o = 's1';
       } else if (w.main.temp > 30) {
@@ -49,7 +56,7 @@ export default function Weather() {
       setIsFetched(true);
     } catch (error) {
       console.error('Error fetching weather data:', error);
-      setError('City not found');
+      setError('City not found or API request failed.');
       setWeather(null);
       setImage('');
       setIsFetched(false);

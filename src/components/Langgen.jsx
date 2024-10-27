@@ -43,7 +43,7 @@ export default function LanguageTranslator() {
       return;
     }
     try {
-      const response = await fetch(`http://16.171.27.195:5000/translate`, {
+      const response = await fetch(`http://51.20.191.107:5000/translate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
