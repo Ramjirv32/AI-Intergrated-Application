@@ -66,34 +66,35 @@ export default function Weather() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-transparent text-white">
-      <div className="bg-[#24283b] p-6 rounded-lg shadow-lg w-full max-w-lg" data-aos="fade-up">
-        <h1 className="text-3xl font-bold mb-6 text-center" data-aos="fade-down">AI Weather Forecast</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4 mb-6" data-aos="fade-right">
-          <div className="flex-1 relative">
-            <input
-              type="text"
-              name="city"
-              id="box"
-              placeholder="Enter location"
-              className="w-full p-3 pr-10 rounded-full bg-[#1a1b26] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </div>
-          <button type="submit" className="bg-pink-500 text-white p-3 rounded-full hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 focus:ring-offset-[#24283b] mt-4 md:mt-0">
-            <Search className="w-5 h-5" />
+    <div className="min-h-screen flex items-center justify-center bg-transparent text-white p-4">
+      <div className="bg-[#24283b] p-4 md:p-6 rounded-lg shadow-lg w-full max-w-lg mx-4" data-aos="fade-up">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-center">
+          AI Weather Forecast
+        </h1>
+        
+        <form className="flex flex-col md:flex-row gap-3 md:gap-4 mb-6">
+          <input
+            type="text"
+            className="w-full p-3 rounded-full bg-[#1a1b26] text-sm md:text-base"
+            name="city"
+            id="box"
+            placeholder="Enter location"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <button className="w-full md:w-auto px-6 py-3 rounded-full">
+            <Search className="w-5 h-5 mx-auto" />
           </button>
         </form>
 
         {error && <p className="text-center text-red-500 mt-4">{error}</p>}
 
         {weather && (
-          <div style={slideStyle} className="mt-6" data-aos="fade-left">
+          <div className="mt-6 space-y-4">
             <div className="text-center">
               <img
                 src={`img/${image}.png`}
-                className="mx-auto h-[200px] w-[200px] object-contain"
+                className="mx-auto h-[150px] md:h-[200px] w-auto"
                 alt="Weather Icon"
               />
               <h4 className="text-pink-400 text-xl mt-4">{weather.weather[0].description}</h4>

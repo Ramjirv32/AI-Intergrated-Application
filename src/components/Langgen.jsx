@@ -1,131 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useState } from 'react';
 
-// python3 -m uvicorn main:app --host 0.0.0.0 --port 5000  aws instance running
-
-const languages = [
-  { code: 'en', name: 'English' },
-  { code: 'ta', name: 'Tamil' },
-  { code: 'fr', name: 'French' },
-  { code: 'es', name: 'Spanish' }
-];
-
-export default function LanguageTranslator() {
-  const [inputText, setInputText] = useState('');
+export default function Langgen() {
+  const [inputText, setText] = useState('');
+  const [targetLanguage, setTargetLanguage] = useState('es');
   const [translatedText, setTranslatedText] = useState('');
-  const [sourceLang, setSourceLang] = useState('en');
-  const [targetLang, setTargetLang] = useState('ta');
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
+  const languages = [
+    { code: 'es', name: 'Spanish' },
+    { code: 'fr', name: 'French' },
+    { code: 'de', name: 'German' },
+    { code: 'it', name: 'Italian' },
+    { code: 'pt', name: 'Portuguese' },
+    { code: 'ru', name: 'Russian' },
+    { code: 'ja', name: 'Japanese' },
+    { code: 'ko', name: 'Korean' },
+    { code: 'zh', name: 'Chinese' },
+    { code: 'hi', name: 'Hindi' }
+  ];
 
   const handleTranslate = async () => {
-    setIsLoading(true);
-    setTranslatedText('');
-    if (inputText === '') {
-      Swal.fire({
-        text: 'Input text cannot be empty.',
-        icon: 'error',
-        background: '#1f2937',
-        color: '#f3f4f6',
-      });
-      setIsLoading(false);
-      return;
-    }
-    try {
-      const response = await fetch(`http://51.20.191.107:5000/translate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: inputText,
-          source_lang: sourceLang,
-          target_lang: targetLang,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error("Error Response:", errorData); 
-        throw new Error(errorData.detail || 'Failed to fetch translation');
-      }
-
-      const data = await response.json();
-      setTranslatedText(data.translated_text);
-    } catch (error) {
-      Swal.fire({
-        text: 'Translation failed: ' + error.message,
-        icon: 'error',
-        background: '#1f2937',
-        color: '#f3f4f6',
-      });
-      setTranslatedText('Translation failed. Please try again later.');
-    } finally {
-      setIsLoading(false);
-    }
+    // Add your translation logic here
+    // This is a placeholder - you'll need to implement actual translation
+    setTranslatedText(`Translated text will appear here`);
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-transparent shadow-lg rounded-lg overflow-hidden" data-aos="fade-up">
-      <div className="p-6">
-        <h2 className="text-2xl font-bold text-center text-white mb-6" data-aos="fade-down">Language Translator</h2>
-        <div className="space-y-4">
-          <textarea
-            placeholder="Enter text to translate..."
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            className="w-full min-h-[100px] p-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 bg-gray-800 text-white"
-            maxLength={500}
-            data-aos="fade-right"
-          />
+    <div 
+      className="flex flex-col items-center min-h-screen p-4 md:p-8"
+      data-aos="fade-up"
+    >
+      <div className="w-full max-w-4xl space-y-6">
+        <h1 
+          className="text-3xl md:text-4xl font-bold text-center text-white mb-8"
+          data-aos="fade-down"
+        >
+          Language Translator
+        </h1>
 
-          <select
-            value={sourceLang}
-            onChange={(e) => setSourceLang(e.target.value)}
-            className="w-full p-2 border border-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-800 text-white"
-            data-aos="fade-right"
-            data-aos-delay="100"
-          >
-            {languages.map(lang => (
-              <option key={lang.code} value={lang.code}>{lang.name}</option>
-            ))}
-          </select>
-
-          <select
-            value={targetLang}
-            onChange={(e) => setTargetLang(e.target.value)}
-            className="w-full p-2 border border-gray-900 rounded focus:outline-none focus:ring-2 focus:ring-gray-500 bg-gray-800 text-white"
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Input Section */}
+          <div 
+            className="bg-gray-800 p-6 rounded-xl shadow-lg"
             data-aos="fade-right"
             data-aos-delay="200"
           >
-            {languages.map(lang => (
-              <option key={lang.code} value={lang.code}>{lang.name}</option>
+            <textarea
+              className="w-full h-48 p-4 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Enter text to translate..."
+              value={inputText}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </div>
+
+          {/* Output Section */}
+          <div 
+            className="bg-gray-800 p-6 rounded-xl shadow-lg"
+            data-aos="fade-left"
+            data-aos-delay="300"
+          >
+            <div className="h-48 p-4 bg-gray-700 text-white rounded-lg overflow-auto">
+              {translatedText || 'Translation will appear here...'}
+            </div>
+          </div>
+        </div>
+
+        {/* Controls */}
+        <div 
+          className="flex flex-col md:flex-row gap-4 items-center justify-center"
+          data-aos="fade-up"
+          data-aos-delay="400"
+        >
+          <select
+            value={targetLanguage}
+            onChange={(e) => setTargetLanguage(e.target.value)}
+            className="px-4 py-2 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          >
+            {languages.map((lang) => (
+              <option key={lang.code} value={lang.code}>
+                {lang.name}
+              </option>
             ))}
           </select>
 
           <button
             onClick={handleTranslate}
-            className="w-full py-2 px-4 bg-pink-700 text-white font-semibold rounded-lg shadow-md hover:bg-pink-600 focus:outline-none"
-            data-aos="fade-up"
-            data-aos-delay="300"
+            className="px-6 py-2 bg-pink-500  text-white rounded-lg hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
-            {isLoading ? 'Translating...' : 'Translate'}
+            Translate
           </button>
-
-          <div data-aos="fade-left" data-aos-delay="400">
-            <h2 className="text-xl font-bold mb-2 text-white">Translated Text:</h2>
-            <div className="p-2 bg-[#3B3F4C] rounded min-h-[100px] border border-gray-500 text-white">
-              {translatedText || 'Translation will appear here...'}
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -59,14 +59,14 @@ const CodeGenerator = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-gray-100 p-6 space-y-6">
-      <h1 data-aos="fade-up" className="text-4xl font-bold text-center">Code Generator</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen text-gray-100 p-3 md:p-6 space-y-4 md:space-y-6">
+      <h1 data-aos="fade-up" className="text-2xl md:text-4xl font-bold text-center">Code Generator</h1>
 
       <textarea
         value={inputText}
         onChange={handleInputChange}
         placeholder="Enter your request..."
-        className="w-full md:w-3/4 lg:w-2/3 p-4 bg-[#2B2F41] rounded-lg border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
+        className="w-full md:w-3/4 lg:w-2/3 p-3 md:p-4 bg-[#2B2F41] rounded-lg border border-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500"
         data-aos="fade-right"
       />
 

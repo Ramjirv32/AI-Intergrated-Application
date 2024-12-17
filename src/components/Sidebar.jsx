@@ -18,7 +18,6 @@ import {
 function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(true); 
 
- 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -37,17 +36,21 @@ function Sidebar() {
   return (
     <div className="relative">
       <div
-        className={`h-screen ${isCollapsed ? "w-20 px-2" : "w-64 px-4"} bg-[#1f1f2e] text-white flex flex-col py-8 transition-all duration-300`}
+        className={`h-screen ${
+          isCollapsed ? "w-16 sm:w-20 px-2" : "w-48 sm:w-64 px-4"
+        } bg-[#1f1f2e] text-white flex flex-col py-4 sm:py-8 transition-all duration-300`}
       >
         <div className="flex items-center justify-between">
           <h2
-            className={`text-2xl font-bold transition-opacity duration-300 ${isCollapsed ? "opacity-0" : "opacity-100"}`}
+            className={`text-xl sm:text-2xl font-bold transition-opacity duration-300 ${
+              isCollapsed ? "opacity-0" : "opacity-100"
+            }`}
           >
             AI Navigator
           </h2>
         </div>
 
-        <nav className="mt-10 flex flex-col gap-6">
+        <nav className="mt-6 sm:mt-10 flex flex-col gap-6">
           <Link to="/" className="flex items-center gap-3 text-lg hover:text-pink-400 transition-colors">
             <FaHome />
             {!isCollapsed && <span>Home</span>}
