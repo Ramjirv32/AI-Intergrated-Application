@@ -26,10 +26,10 @@ export default function Langgen() {
 
   return (
     <div 
-      className="flex flex-col items-center min-h-screen p-4 md:p-8"
+      className="flex flex-col items-center min-h-screen p-2 sm:p-4 md:p-8"
       data-aos="fade-up"
     >
-      <div className="w-full max-w-4xl space-y-6">
+      <div className="w-full max-w-4xl space-y-4 sm:space-y-6">
         <h1 
           className="text-3xl md:text-4xl font-bold text-center text-white mb-8"
           data-aos="fade-down"

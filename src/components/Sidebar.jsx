@@ -4,15 +4,13 @@ import {
   FaHome,
   FaComments,
   FaImage,
-  FaUser,
   FaLanguage,
   FaQrcode,
   FaCloudSun,
   FaAngleLeft,
   FaAngleRight,
   FaCode,
-  FaVideo,
-  FaEye
+  FaVideo
 } from "react-icons/fa";
 
 function Sidebar() {
@@ -21,15 +19,14 @@ function Sidebar() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setIsCollapsed(false); 
+        setIsCollapsed(false);
       } else {
-        setIsCollapsed(true); 
+        setIsCollapsed(true);
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); 
-
+    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -91,30 +88,8 @@ function Sidebar() {
             {!isCollapsed && <span>Weather</span>}
           </Link>
         </nav>
-
-        <div className="mt-auto flex items-center gap-3">
-          <FaUser />
-          {!isCollapsed && (
-            <div className="flex flex-col">
-              <div className="flex items-center">
-                <p className="text-sm text-gray-400">Ramji</p>
-                <p className="text-sm text-gray-400 ml-3">Web Developer</p>
-              </div>
-              <a
-                href="https://portfolio-tan-iota-74.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center mt-1"
-              >
-                View Portfolio
-                <FaEye className="text-gray-400 hover:text-pink-400 transition-colors ml-4" />
-              </a>
-            </div>
-          )}
-        </div>
       </div>
 
-     
       {!isCollapsed && (
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
